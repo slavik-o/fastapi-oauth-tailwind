@@ -1,8 +1,8 @@
-# python scraper with oauth
+# Python skeleton project (FastAPI + Authlib + TailwindCSS)
 
 ## Install
 
-```
+```bash
 $ python -m venv .venv/
 $ source .venv/bin/activate
 $ pip install -r requirements.txt
@@ -11,14 +11,22 @@ $ cd styles/ && pnpm install
 
 ## Run
 
-```
-$ make
-```
+* Start app:
+
+    ```bash
+    $ make
+    ```
 
 ## Dev
 
+* Build & watch python app:
 
-```
-$ make dev
-$ make css
-```
+    ```bash
+    $ make dev
+    ```
+
+* Build & watch CSS styles:
+
+    ```bash
+    $ make css
+    ```
