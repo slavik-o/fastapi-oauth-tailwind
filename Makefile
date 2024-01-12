@@ -1,3 +1,5 @@
+.PHONY: run dev css fmt
+
 run:
 	@source .venv/bin/activate && python main.py
 
@@ -9,3 +11,5 @@ css:
 
 fmt:
 	@source .venv/bin/activate && black .
+
+.DEFAULT_GOAL := run
