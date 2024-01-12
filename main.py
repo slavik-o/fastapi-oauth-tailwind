@@ -17,9 +17,7 @@ oauth.register(
     client_id=os.getenv("GOOGLE_CLIENT_ID"),
     client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
     server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
-    client_kwargs={
-        "scope": "openid email profile"
-    }
+    client_kwargs={"scope": "openid email profile"},
 )
 
 # App
@@ -31,21 +29,27 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # Views
 views = Jinja2Templates(directory="views")
 
+
 # Middleware
 @app.middleware("http")
 async def auth_required(request: Request, call_next):
-    if not request.url.path.startswith("/auth") and not request.url.path.startswith("/static"):
+    if not request.url.path.startswith("/auth") and not request.url.path.startswith(
+        "/static"
+    ):
         if "user" not in request.session:
             return RedirectResponse("/auth")
 
     return await call_next(request)
 
+
 app.add_middleware(SessionMiddleware, secret_key=os.getenv("COOKIE_SECRET"))
+
 
 # Routes
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
     return views.TemplateResponse(request=request, name="index.html")
+
 
 @app.get("/logout")
 async def logout(request: Request):
@@ -53,15 +57,18 @@ async def logout(request: Request):
 
     return RedirectResponse(request.url_for("index"))
 
+
 @app.get("/auth", response_class=HTMLResponse)
 def login(request: Request):
     return views.TemplateResponse(request=request, name="login.html")
+
 
 @app.get("/auth/{provider}")
 async def auth(provider: str, request: Request):
     redirect_uri = request.url_for("auth_callback", provider=provider)
 
     return await getattr(oauth, provider).authorize_redirect(request, redirect_uri)
+
 
 @app.get("/auth/{provider}/callback")
 async def auth_callback(provider: str, request: Request, response: Response):
@@ -71,6 +78,8 @@ async def auth_callback(provider: str, request: Request, response: Response):
 
     return RedirectResponse(request.url_for("index"))
 
+
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT")))

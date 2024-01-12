@@ -1,4 +1,4 @@
-# Python skeleton project (FastAPI + Authlib + TailwindCSS)
+# Skeleton project (FastAPI + Authlib + TailwindCSS)
 
 ## Install
 
@@ -29,4 +29,10 @@ $ cd styles/ && pnpm install
 
     ```bash
     $ make css
+    ```
+
+* Format python code
+
+    ```bash
+    $ make fmt
     ```

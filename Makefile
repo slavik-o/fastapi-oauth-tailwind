@@ -6,3 +6,6 @@ dev:
 
 css:
 	cd styles/ && pnpx tailwindcss -i app.css -o ../static/styles.css --watch
+
+fmt:
+	@source .venv/bin/activate && black .
