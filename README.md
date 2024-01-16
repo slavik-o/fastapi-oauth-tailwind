@@ -1,4 +1,6 @@
-# Skeleton project (FastAPI + Authlib + TailwindCSS)
+# Python web app
+
+FastAPI + Authlib + TailwindCSS
 
 ## Install
 
@@ -6,6 +8,7 @@
 $ python -m venv .venv/
 $ source .venv/bin/activate
 $ pip install -r requirements.txt
+$ cp .env.sample .env
 $ cd styles/ && pnpm install
 ```
 
